@@ -1,6 +1,6 @@
 # Unoffical DHL Express PHP SDK
 
-This is *unoffical* library is wrapping some functions of the **DHL Express** JSON/REST API (called MyDHL_API).
+This *unoffical* library is wrapping some functions of the **DHL Express** JSON/REST API (called MyDHL_API).
 
 To get a SDK for **standard DHL** shipping, please have a look at the great SDK from [Petschko](https://github.com/Petschko/dhl-php-sdk) i've used for inspiration.
 
