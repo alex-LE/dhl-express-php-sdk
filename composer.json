@@ -1,0 +1,21 @@
+{
+    "name": "alex-LE/dhl-express-php-sdk",
+    "description": "DHL Express SDK",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Reichardt",
+            "email": "mail@alexander-reichardt.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "alexLE\\DHLExpress\\": "src/"
+        }
+    }
+}
