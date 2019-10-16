@@ -247,6 +247,8 @@ class Address extends DataClass {
 
         if (!empty($this->buildingName)) $result['BuildingName'] = $this->buildingName;
         if (!empty($this->streetLines)) $result['StreetLines'] = $this->streetLines;
+        if (!empty($this->streetLines2)) $result['StreetLines2'] = $this->streetLines2;
+        if (!empty($this->streetLines3)) $result['StreetLines3'] = $this->streetLines3;
         if (!empty($this->streetName)) $result['StreetName'] = $this->streetName;
         if (!empty($this->streetNumber)) $result['StreetNumber'] = $this->streetNumber;
         if (!empty($this->stateOrProvince)) $result['StateOrProvinceCode'] = $this->stateOrProvince;
