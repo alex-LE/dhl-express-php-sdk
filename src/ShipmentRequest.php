@@ -84,7 +84,7 @@ class ShipmentRequest {
     /**
      * @return array
      */
-    protected function buildData() {
+    public function buildData() {
         return [
             'ShipmentRequest' => [
                 'RequestedShipment' => $this->requestedShipment->buildData()
