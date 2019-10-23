@@ -70,8 +70,15 @@ class ShipmentInfo extends DataClass {
      */
     protected $account;
 
-//    protected $billing;
-//    protected $specialServices;
+    /**
+     * @var Billing
+     */
+    protected $billing;
+
+    /**
+     * @var SpecialService[]
+     */
+    protected $specialServices = [];
 
     /**
      * @var string
@@ -214,10 +221,41 @@ class ShipmentInfo extends DataClass {
     }
 
     /**
+     * @param SpecialService $specialService
+     */
+    public function addSpecialService(SpecialService $specialService) {
+        $this->specialServices[] = $specialService;
+    }
+
+    /**
+     * @return SpecialService[]
+     */
+    public function getSpecialServices() {
+        return $this->specialServices;
+    }
+
+    /**
+     * @return Billing
+     */
+    public function getBilling() {
+        return $this->billing;
+    }
+
+    /**
+     * @param Billing $billing
+     * @return ShipmentInfo
+     */
+    public function setBilling($billing) {
+        $this->billing = $billing;
+        return $this;
+    }
+
+
+    /**
      * @return array
      */
     public function buildData() {
-        return [
+        $result = [
             'DropOffType' => $this->dropOffType,
             'ServiceType' => $this->serviceType,
             'Account' => $this->account,
@@ -226,5 +264,20 @@ class ShipmentInfo extends DataClass {
             'LabelType' => $this->labelType,
             'LabelTemplate' => $this->labelTemplate,
         ];
+
+        if (is_array($this->specialServices) && count($this->specialServices) > 0) {
+            $specialServices = [];
+            foreach($this->specialServices as $specialService) {
+                $specialServices[] = ['Service' => $specialService->buildData()];
+            }
+
+            $result['SpecialServices'] = $specialServices;
+        }
+
+        if ($this->billing instanceof Billing) {
+            $result['Billing'] = $this->billing->buildData();
+        }
+
+        return $result;
     }
 }
