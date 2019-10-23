@@ -23,7 +23,22 @@ You can use [Composer](https://getcomposer.org/) to install the package to your 
 
 ## Usage
 
-see [examples](/examples) for basic examples
+see [examples](/examples) for basic examples and scripts to generate test labels (see below)
+
+## Request Access to live API
+
+To get the credentials for the live account, DHL requested test labels for some scenarios:
+
+The test scripts can be found in the [examples](/examples) folder:
+
+1. National shipping with saturday delivery - [test_1.php](/examples/test_1.php)
+2. National shipping time option and 2 packages - [test_2.php](/examples/test_2.php)
+3. International shipping not liable to duty - [test_3.php](/examples/test_3.php)
+4. International shipping liable to duty - [test_4.php](/examples/test_4.php)
+5. International shipping liable to duty with service DDP - [test_5.php](/examples/test_5.php)
+6. International shipping liable to duty with different payment account - [test_6.php](/examples/test_6.php)
+
+
 
 
 More details will follow soon. This package is WIP.
