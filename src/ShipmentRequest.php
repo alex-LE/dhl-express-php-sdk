@@ -58,8 +58,9 @@ class ShipmentRequest {
     public function send() {
         $client = new Client();
 
+        $data = $this->buildData();
         $options = [
-            'json' => $this->buildData(),
+            'json' => $data,
             'auth' => [
                 $this->credentials->getUsername(),
                 $this->credentials->getPassword()
@@ -73,7 +74,7 @@ class ShipmentRequest {
             return false;
         }
 
-        $response = new ShipmentResponse($apiResponse);
+        $response = new ShipmentResponse($apiResponse, $data);
         if (!$response->isSuccessful()) {
             $this->errors = array_merge($this->errors, $response->getErrors());
         }

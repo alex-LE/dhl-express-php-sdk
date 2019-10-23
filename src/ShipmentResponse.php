@@ -5,7 +5,15 @@ use Psr\Http\Message\ResponseInterface;
 
 class ShipmentResponse {
 
+    /**
+     * @var ResponseInterface 
+     */
     protected $rawResponse;
+
+    /**
+     * @var array
+     */
+    protected $sentData;
 
     /**
      * @var integer[]
@@ -13,9 +21,9 @@ class ShipmentResponse {
     protected $statusCodes;
 
     /**
-     * @var array
+     * @var string|array
      */
-    protected $trackingNumbers;
+    protected $trackingNumber;
 
     /**
      * @var string base64 encoded image
@@ -35,9 +43,11 @@ class ShipmentResponse {
     /**
      * ShipmentResponse constructor.
      * @param ResponseInterface $rawResponse
+     * @param array $sentData
      */
-    function __construct($rawResponse) {
+    function __construct($rawResponse, $sentData) {
         $this->rawResponse = $rawResponse;
+        $this->sentData = $sentData;
         $this->statusCodes = [];
         $this->errors = [];
 
@@ -52,13 +62,24 @@ class ShipmentResponse {
     }
 
     /**
-     * @return array
+     * @return string|array
      */
-    public function getTrackingNumbers() {
-        return $this->trackingNumbers;
+    public function getTrackingNumber() {
+        return $this->trackingNumber;
     }
 
     /**
+     * alias for getTrackingNumbers() - for compatibility reasons with Petschko/dhl-php-sdk
+     *
+     * @return array|string
+     */
+    public function getShipmentNumber() {
+        return $this->getTrackingNumber();
+    }
+
+    /**
+     * base64 binary image content
+     *
      * @return string
      */
     public function getLabel() {
@@ -73,6 +94,13 @@ class ShipmentResponse {
     }
 
     /**
+     * @return array
+     */
+    public function getSentData() {
+        return $this->sentData;
+    }
+
+    /**
      * @return bool
      */
     public function isSuccessful() {
@@ -84,7 +112,7 @@ class ShipmentResponse {
 
         if (count($response['ShipmentResponse']['Notification']) == 1 && $response['ShipmentResponse']['Notification'][0]['@code'] == 0) {
             $this->statusCodes[0] = $response['ShipmentResponse']['Notification'][0]['@code'];
-            $this->trackingNumbers = $response['ShipmentResponse']['PackagesResult']['PackageResult'];
+            $this->trackingNumber = $response['ShipmentResponse']['PackagesResult']['PackageResult'][0]['TrackingNumber'];
             $this->label = $response['ShipmentResponse']['LabelImage'][0]['GraphicImage'];
 
             return true;
