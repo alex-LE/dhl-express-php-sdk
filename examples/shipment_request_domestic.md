@@ -100,7 +100,7 @@ $commodities->setDescription('Stuff');
 $internationalDetail = new InternationalDetail();
 $internationalDetail
     ->setCommodities($commodities)
-    ->setContent(InternationalDetail::CONTENT_NON_DOCUMENTS);
+    ->setContent(InternationalDetail::CONTENT_DOCUMENTS);
 
 $timestamp = new DateTime("now", new DateTimeZone("Europe/Berlin"));
 $timestamp->modify('+3 days');
@@ -119,7 +119,7 @@ $shipment->setRequestedShipment($requestedShipment);
 $response = $shipment->send();
 
 if ($response->isSuccessful()) {
-    print_r($response->getTrackingNumbers());
+    print_r($response->getTrackingNumber());
 } else {
     print_r($response->getErrors());
 }
