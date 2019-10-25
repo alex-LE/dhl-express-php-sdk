@@ -189,8 +189,8 @@ class SpecialService extends DataClass {
         if (!empty($this->serviceValue)) $result['ServiceValue'] = $this->serviceValue;
         if (!empty($this->currencyCode)) $result['CurrencyCode'] = $this->currencyCode;
         if (!empty($this->paymentCode)) $result['PaymentCode'] = $this->paymentCode;
-        if (!empty($this->startDate) && $this->startDate instanceof \DateTime) $result['StartDate'] = $this->startDate->format('Y-m-d\TH:i:s\G\M\TP');
-        if (!empty($this->endDate) && $this->endDate instanceof \DateTime) $result['EndDate'] = $this->endDate->format('Y-m-d\TH:i:s\G\M\TP');
+        if (!empty($this->startDate) && $this->startDate instanceof \DateTime) $result['StartDate'] = $this->startDate->format('Y-m-d');
+        if (!empty($this->endDate) && $this->endDate instanceof \DateTime) $result['EndDate'] = $this->endDate->format('Y-m-d');
         if (!empty($this->textInstruction)) $result['TextInstruction'] = $this->textInstruction;
 
         return $result;
