@@ -62,6 +62,8 @@ class ShipmentResponse {
     }
 
     /**
+     * if shipping contains multiple packages, the array will be index by the number of the package starting at 1
+     *
      * @return string|array
      */
     public function getTrackingNumber() {
@@ -110,10 +112,18 @@ class ShipmentResponse {
     protected function parseRawResponse() {
         $response = \GuzzleHttp\json_decode($this->rawResponse->getBody()->getContents(), true);
 
+        $this->label = $response['ShipmentResponse']['LabelImage'][0]['GraphicImage'];
+
         if (count($response['ShipmentResponse']['Notification']) == 1 && $response['ShipmentResponse']['Notification'][0]['@code'] == 0) {
             $this->statusCodes[0] = $response['ShipmentResponse']['Notification'][0]['@code'];
-            $this->trackingNumber = $response['ShipmentResponse']['PackagesResult']['PackageResult'][0]['TrackingNumber'];
-            $this->label = $response['ShipmentResponse']['LabelImage'][0]['GraphicImage'];
+
+            if (count($response['ShipmentResponse']['PackagesResult']['PackageResult']) == 1) {
+                $this->trackingNumber = $response['ShipmentResponse']['PackagesResult']['PackageResult'][0]['TrackingNumber'];
+            } else {
+                foreach($response['ShipmentResponse']['PackagesResult']['PackageResult'] as $package) {
+                    $this->trackingNumber[$package['@number']] = $package['TrackingNumber'];
+                }
+            }
 
             return true;
         }

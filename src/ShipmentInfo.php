@@ -108,6 +108,11 @@ class ShipmentInfo extends DataClass {
     protected $labelTemplate;
 
     /**
+     * @var LabelOptions
+     */
+    protected $labelOptions;
+
+    /**
      * @return string
      */
     public function getDropOffType() {
@@ -222,9 +227,11 @@ class ShipmentInfo extends DataClass {
 
     /**
      * @param SpecialService $specialService
+     * @return ShipmentInfo
      */
     public function addSpecialService(SpecialService $specialService) {
         $this->specialServices[] = $specialService;
+        return $this;
     }
 
     /**
@@ -250,6 +257,21 @@ class ShipmentInfo extends DataClass {
         return $this;
     }
 
+    /**
+     * @return LabelOptions
+     */
+    public function getLabelOptions() {
+        return $this->labelOptions;
+    }
+
+    /**
+     * @param LabelOptions $labelOptions
+     * @return ShipmentInfo
+     */
+    public function setLabelOptions($labelOptions) {
+        $this->labelOptions = $labelOptions;
+        return $this;
+    }
 
     /**
      * @return array
@@ -276,6 +298,10 @@ class ShipmentInfo extends DataClass {
 
         if ($this->billing instanceof Billing) {
             $result['Billing'] = $this->billing->buildData();
+        }
+
+        if ($this->labelOptions instanceof LabelOptions) {
+            $result['LabelOptions'] = $this->labelOptions->buildData();
         }
 
         return $result;
