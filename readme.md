@@ -21,6 +21,18 @@ You can use [Composer](https://getcomposer.org/) to install the package to your 
 
 `composer require alex-le/dhl-express-php-sdk`
 
+## Supported API Operations
+
+| Operation | supported |
+|---|---|
+| RateRequest | no |
+| ShipmentRequest | yes |
+| TrackingRequest | no |
+| DocumentRetrieve | no |
+| updateShipment | no |
+| requestPickup | no |
+
+
 ## Usage
 
 see [examples](/examples) for basic examples and scripts to generate test labels (see below)
