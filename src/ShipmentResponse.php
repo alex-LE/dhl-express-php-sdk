@@ -26,6 +26,11 @@ class ShipmentResponse {
     protected $trackingNumber;
 
     /**
+     * @var string
+     */
+    protected $shipmentIdentificationNumber;
+
+    /**
      * @var string base64 encoded image
      */
     protected $label;
@@ -102,6 +107,10 @@ class ShipmentResponse {
         return $this->sentData;
     }
 
+    public function getShipmentIdentificationNumber() {
+        return $this->shipmentIdentificationNumber;
+    }
+
     /**
      * @return bool
      */
@@ -113,6 +122,7 @@ class ShipmentResponse {
         $response = \GuzzleHttp\json_decode($this->rawResponse->getBody()->getContents(), true);
 
         $this->label = $response['ShipmentResponse']['LabelImage'][0]['GraphicImage'];
+        $this->shipmentIdentificationNumber = $response['ShipmentResponse']['ShipmentIdentificationNumber'];
 
         if (count($response['ShipmentResponse']['Notification']) == 1 && $response['ShipmentResponse']['Notification'][0]['@code'] == 0) {
             $this->statusCodes[0] = $response['ShipmentResponse']['Notification'][0]['@code'];
