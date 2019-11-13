@@ -251,6 +251,13 @@ class ShipmentInfo extends DataClass {
     }
 
     /**
+     * @return DocumentImage[]
+     */
+    public function getDocumentImages() {
+        return $this->documentImages;
+    }
+
+    /**
      * @return SpecialService[]
      */
     public function getSpecialServices() {
