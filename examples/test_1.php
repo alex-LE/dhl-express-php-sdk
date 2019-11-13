@@ -23,7 +23,7 @@ $credentials
     ->setPassword('YOUR-PASSWORD');
 
 $specialService = new SpecialService();
-$specialService->setServiceType(SpecialService::NATIONAL_SATURDAY_DELIVERY);
+$specialService->setServiceType(SpecialService::SATURDAY_DELIVERY);
 
 $shipmentInfo = new ShipmentInfo();
 $shipmentInfo

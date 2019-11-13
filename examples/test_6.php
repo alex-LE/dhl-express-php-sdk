@@ -23,8 +23,9 @@ $credentials
 
 $billing = new Billing();
 $billing
-    ->setShipperAccountNumber('YOUR-ACCOUNT')
-    ->setShippingPaymentType('S');
+    ->setShipperAccountNumber('RECEIVER-ACCOUNT')
+    ->setBillingAccountNumber('RECEIVER-ACCOUNT')
+    ->setShippingPaymentType('R');
 
 $shipmentInfo = new ShipmentInfo();
 $shipmentInfo

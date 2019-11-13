@@ -121,10 +121,10 @@ class ShipmentResponse {
     protected function parseRawResponse() {
         $response = \GuzzleHttp\json_decode($this->rawResponse->getBody()->getContents(), true);
 
-        $this->label = $response['ShipmentResponse']['LabelImage'][0]['GraphicImage'];
-        $this->shipmentIdentificationNumber = $response['ShipmentResponse']['ShipmentIdentificationNumber'];
-
         if (count($response['ShipmentResponse']['Notification']) == 1 && $response['ShipmentResponse']['Notification'][0]['@code'] == 0) {
+            $this->label = $response['ShipmentResponse']['LabelImage'][0]['GraphicImage'];
+            $this->shipmentIdentificationNumber = $response['ShipmentResponse']['ShipmentIdentificationNumber'];
+
             $this->statusCodes[0] = $response['ShipmentResponse']['Notification'][0]['@code'];
 
             if (count($response['ShipmentResponse']['PackagesResult']['PackageResult']) == 1) {

@@ -10,6 +10,8 @@ use alexLE\DHLExpress\Recipient;
 use alexLE\DHLExpress\Commodities;
 use alexLE\DHLExpress\Credentials;
 use alexLE\DHLExpress\ShipmentInfo;
+use alexLE\DHLExpress\DocumentImage;
+use alexLE\DHLExpress\SpecialService;
 use alexLE\DHLExpress\ShipmentRequest;
 use alexLE\DHLExpress\RequestedPackage;
 use alexLE\DHLExpress\RequestedShipment;
@@ -20,6 +22,14 @@ $credentials
     ->setUsername('YOUR-USERNAME')
     ->setPassword('YOUR-PASSWORD');
 
+$specialService = new SpecialService();
+$specialService->setServiceType(SpecialService::PAPERLESS_TRADE);
+
+$invoice = new DocumentImage();
+$invoice->setDocumentImageFormat(DocumentImage::DOCUMENT_IMAGE_FORMAT_PDF);
+$invoice->setDocumentImageType(DocumentImage::DOCUMENT_IMAGE_TYPE_COMMERCIAL_INVOICE);
+$invoice->setDocumentImage(base64_encode(file_get_contents('commercial_invoice.pdf')));
+
 $shipmentInfo = new ShipmentInfo();
 $shipmentInfo
     ->setDropOffType(ShipmentInfo::DROP_OFF_TYPE_REGULAR_PICKUP)
@@ -28,7 +38,10 @@ $shipmentInfo
     ->setCurrency('EUR')
     ->setUnitOfMeasurement(ShipmentInfo::UNIT_OF_MEASRUREMENTS_KG_CM)
     ->setLabelType(ShipmentInfo::LABEL_TYPE_PDF)
-    ->setLabelTemplate(ShipmentInfo::LABEL_TEMPLATE_ECOM26_A6_002);
+    ->setLabelTemplate(ShipmentInfo::LABEL_TEMPLATE_ECOM26_A6_002)
+    ->setPaperlessTradeEnabled(true)
+    ->addSpecialService($specialService)
+    ->addDocumentImage($invoice);
 
 $shipperContact = new Contact();
 $shipperContact

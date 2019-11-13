@@ -10,6 +10,7 @@ use alexLE\DHLExpress\Recipient;
 use alexLE\DHLExpress\Commodities;
 use alexLE\DHLExpress\Credentials;
 use alexLE\DHLExpress\ShipmentInfo;
+use alexLE\DHLExpress\SpecialService;
 use alexLE\DHLExpress\ShipmentRequest;
 use alexLE\DHLExpress\RequestedPackage;
 use alexLE\DHLExpress\RequestedShipment;
@@ -20,6 +21,9 @@ $credentials
     ->setUsername('YOUR-USERNAME')
     ->setPassword('YOUR-PASSWORD');
 
+$specialService = new SpecialService();
+$specialService->setServiceType(SpecialService::INTERNATIONAL_DUTY_DUTIES_AND_TAXES_PAID);
+
 $shipmentInfo = new ShipmentInfo();
 $shipmentInfo
     ->setDropOffType(ShipmentInfo::DROP_OFF_TYPE_REGULAR_PICKUP)
@@ -28,7 +32,8 @@ $shipmentInfo
     ->setCurrency('EUR')
     ->setUnitOfMeasurement(ShipmentInfo::UNIT_OF_MEASRUREMENTS_KG_CM)
     ->setLabelType(ShipmentInfo::LABEL_TYPE_PDF)
-    ->setLabelTemplate(ShipmentInfo::LABEL_TEMPLATE_ECOM26_A6_002);
+    ->setLabelTemplate(ShipmentInfo::LABEL_TEMPLATE_ECOM26_A6_002)
+    ->addSpecialService($specialService);
 
 $shipperContact = new Contact();
 $shipperContact

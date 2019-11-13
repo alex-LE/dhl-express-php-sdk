@@ -95,7 +95,16 @@ class ShipmentInfo extends DataClass {
 //    protected $archiveLabelTemplate;
 //    protected $customsInvoiceTemplate;
 //    protected $shipmentReceiptTemplate;
-//    protected $paperlessTradeEnabled;
+
+    /**
+     * @var boolean
+     */
+    protected $paperlessTradeEnabled = false;
+
+    /**
+     * @var DocumentImage[]
+     */
+    protected $documentImages = [];
 
     /**
      * @var string
@@ -235,6 +244,13 @@ class ShipmentInfo extends DataClass {
     }
 
     /**
+     * @param DocumentImage $documentImage
+     */
+    public function addDocumentImage(DocumentImage $documentImage) {
+        $this->documentImages[] = $documentImage;
+    }
+
+    /**
      * @return SpecialService[]
      */
     public function getSpecialServices() {
@@ -274,6 +290,23 @@ class ShipmentInfo extends DataClass {
     }
 
     /**
+     * @return bool
+     */
+    public function getPaperlessTradeEnabled() {
+        return $this->paperlessTradeEnabled;
+    }
+
+    /**
+     * @param bool $paperlessTradeEnabled
+     * @return ShipmentInfo
+     */
+    public function setPaperlessTradeEnabled($paperlessTradeEnabled) {
+        $this->paperlessTradeEnabled = $paperlessTradeEnabled;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function buildData() {
@@ -302,6 +335,19 @@ class ShipmentInfo extends DataClass {
 
         if ($this->labelOptions instanceof LabelOptions) {
             $result['LabelOptions'] = $this->labelOptions->buildData();
+        }
+
+        if (is_array($this->documentImages) && count($this->documentImages) > 0) {
+            $documentImages = [];
+            foreach($this->documentImages as $documentImage) {
+                $documentImages[] = ['DocumentImage' => $documentImage->buildData()];
+            }
+
+            $result['DocumentImages'] = $documentImages;
+        }
+
+        if ($this->paperlessTradeEnabled) {
+            $result['PaperlessTradeEnabled'] = 1;
         }
 
         return $result;

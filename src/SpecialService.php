@@ -5,13 +5,11 @@ class SpecialService extends DataClass {
 
     const NATIONAL_EARLY_DELIVERY_BEFORE_0800 = 'TB';
     const NATIONAL_LATE_DELIVERY_BETWEEN_1700_AND_2200 = 'TD';
-    const NATIONAL_SATURDAY_DELIVERY = 'AG';
     const NATIONAL_LATE_PICKUP = 'QD';
     const NATIONAL_SATURDAY_PICKUP = 'AB';
     const NATIONAL_INSURANCE = 'II';
     const NATIONAL_LIMITED_QUANTITIES = 'HL';                       // dangerous goods
 
-    const INTERNATIONAL_SATURDAY_DELIVERY = 'AA';
     const INTERNATIONAL_INSURANCE = 'II';
     const INTERNATIONAL_PICKUP_BY_CUSTOMER = 'LX';
     const INTERNATIONAL_DRY_ICE = 'HC';                             // dangerous goods
@@ -30,6 +28,10 @@ class SpecialService extends DataClass {
     const ECONOMY_SELECT_DELIVERY_ON_APPOINTMENT = 'TE';
     const ECONOMY_SELECT_HOLD_FOR_COLLECTION = 'LX';
     const ECONOMY_SELECT_LIMITED_QUANTITIES = 'HL';                 // dangerous goods
+
+    const SATURDAY_DELIVERY = 'AA';
+
+    const PAPERLESS_TRADE = 'WY';                                   // mandatory if using paperless trade
 
     /**
      * @var string
