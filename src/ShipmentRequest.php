@@ -6,7 +6,8 @@ use GuzzleHttp\Exception\TransferException;
 
 class ShipmentRequest {
 
-    const ENDPOINT = 'https://wsbexpress.dhl.com/rest/sndpt/ShipmentRequest';
+    const ENDPOINT_TEST = 'https://wsbexpress.dhl.com/rest/sndpt/ShipmentRequest';
+    const ENDPOINT_LIVE = 'https://wsbexpress.dhl.com:443/rest/gbl/ShipmentRequest';
 
     /**
      * @var Credentials
@@ -67,8 +68,10 @@ class ShipmentRequest {
             ]
         ];
 
+        $endpoint = ($this->credentials->isTestMode()) ? self::ENDPOINT_TEST : self::ENDPOINT_LIVE;
+
         try {
-            $apiResponse = $client->post(self::ENDPOINT, $options);
+            $apiResponse = $client->post($endpoint, $options);
         } catch (TransferException $e) {
             $this->errors[] = $e->getMessage();
             return false;

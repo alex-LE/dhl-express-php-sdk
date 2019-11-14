@@ -14,6 +14,18 @@ class Credentials {
     protected $password;
 
     /**
+     * @var bool
+     */
+    protected $testMode;
+
+    /**
+     * @param bool $testMode
+     */
+    public function __construct($testMode = false) {
+        $this->testMode = $testMode;
+    }
+
+    /**
      * @return string
      */
     public function getUsername() {
@@ -42,6 +54,23 @@ class Credentials {
      */
     public function setPassword($password) {
         $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTestMode() {
+        return $this->testMode;
+    }
+
+    /**
+     * @param bool $testMode
+     * @return Credentials
+     */
+    public function setTestMode($testMode) {
+        $this->testMode = $testMode;
+
         return $this;
     }
 }

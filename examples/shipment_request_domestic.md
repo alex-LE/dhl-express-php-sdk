@@ -18,7 +18,7 @@ use alexLE\DHLExpress\RequestedShipment;
 use alexLE\DHLExpress\InternationalDetail;
     
 
-$credentials = new Credentials();
+$credentials = new Credentials(true);   // use testmode
 $credentials
     ->setUsername('YOUR-USERNAME')
     ->setPassword('YOUR-PASSWORD');
