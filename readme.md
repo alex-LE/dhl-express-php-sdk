@@ -51,6 +51,13 @@ The test scripts can be found in the [examples](/examples) folder:
 6. International shipping liable to duty with different payment account - [test_6.php](/examples/test_6.php)
 
 
+## Things i've learned during testing the API
+
+- The "InternationalDetail" part is mandatory even if its national package
+- StreetName and StreetNumber in der Address don't have any effect right now, the "StreetLines" field is always used
+- Company Name in the Recipient address is the name on the package (first line)
+- Package Dimensions are mandatory, but they don't have to be exact (DHL will check them anyway) - so it is possible to always use the smallest package size you have
+- "StreetLine" could **not** be used for any additional name - use "StreetLines2" for this - always use it for street name and number
 
 
 More details will follow soon. This package is WIP.
