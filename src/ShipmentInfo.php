@@ -116,6 +116,17 @@ class ShipmentInfo extends DataClass {
      */
     protected $labelTemplate;
 
+
+    /**
+     * @var string
+     */
+    protected $archieveLabelTemplate; // Added By Adi
+
+    /**
+     * @var string
+     */
+    protected $customsInvoiceTemplate; // Added By Adi
+
     /**
      * @var LabelOptions
      */
@@ -235,6 +246,38 @@ class ShipmentInfo extends DataClass {
     }
 
     /**
+     * @return string
+     */
+    public function getArchieveLabelTemplate() {
+        return $this->archieveLabelTemplate;
+    }
+
+    /**
+     * @param string $archieveLabelTemplate
+     * @return ShipmentInfo
+     */
+    public function setArchieveLabelTemplate($archieveLabelTemplate) {
+        $this->archieveLabelTemplate = $archieveLabelTemplate;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomsInvoiceTemplate() {
+        return $this->customsInvoiceTemplate;
+    }
+
+    /**
+     * @param string $customsInvoiceTemplate
+     * @return ShipmentInfo
+     */
+    public function setCustomsInvoiceTemplate($customsInvoiceTemplate) {
+        $this->customsInvoiceTemplate = $customsInvoiceTemplate;
+        return $this;
+    }
+
+    /**
      * @param SpecialService $specialService
      * @return ShipmentInfo
      */
@@ -325,6 +368,8 @@ class ShipmentInfo extends DataClass {
             'UnitOfMeasurement' => $this->unitOfMeasurement,
             'LabelType' => $this->labelType,
             'LabelTemplate' => $this->labelTemplate,
+            'ArchiveLabelTemplate' => $this->archieveLabelTemplate,
+            'CustomsInvoiceTemplate' => $this->customsInvoiceTemplate,
         ];
 
         if (is_array($this->specialServices) && count($this->specialServices) > 0) {

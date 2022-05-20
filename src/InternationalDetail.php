@@ -18,6 +18,11 @@ class InternationalDetail extends DataClass {
     protected $commodities;
 
     /**
+     * @var ExportDeclaration;
+     */
+    protected $exportDeclaration;
+
+    /**
      * @return string
      */
     public function getContent(): string {
@@ -50,6 +55,22 @@ class InternationalDetail extends DataClass {
     }
 
     /**
+     * @return ExportDeclaration
+     */
+    public function getExportDeclaration() {
+        return $this->exportDeclaration;
+    }
+
+    /**
+     * @param ExportDeclaration $exportDeclaration
+     * @return InternationalDetail
+     */
+    public function setExportDeclaration(ExportDeclaration $exportDeclaration) {
+        $this->exportDeclaration = $exportDeclaration;
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function buildData() {
@@ -58,6 +79,8 @@ class InternationalDetail extends DataClass {
         ];
 
         if ($this->commodities instanceof Commodities) $result['Commodities'] = $this->commodities->buildData();
+
+        if ($this->exportDeclaration instanceof ExportDeclaration) $result['ExportDeclaration'] = $this->exportDeclaration->buildData();
 
         return $result;
     }
