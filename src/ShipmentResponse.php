@@ -31,6 +31,11 @@ class ShipmentResponse {
     protected $shipmentIdentificationNumber;
 
     /**
+     * @var string
+     */
+    protected $DispatchConfirmationNumber;
+
+    /**
      * @var string base64 encoded image
      */
     protected $label;
@@ -73,6 +78,15 @@ class ShipmentResponse {
      */
     public function getTrackingNumber() {
         return $this->trackingNumber;
+    }
+
+    /**
+     * if shipping contains multiple packages, the array will be index by the number of the package starting at 1
+     *
+     * @return string|array
+     */
+    public function getDispatchConfirmationNumber() {
+        return $this->DispatchConfirmationNumber;
     }
 
     /**
@@ -124,6 +138,9 @@ class ShipmentResponse {
         if (count($response['ShipmentResponse']['Notification']) == 1 && $response['ShipmentResponse']['Notification'][0]['@code'] == 0) {
             $this->label = $response['ShipmentResponse']['LabelImage'][0]['GraphicImage'];
             $this->shipmentIdentificationNumber = $response['ShipmentResponse']['ShipmentIdentificationNumber'];
+            if ( isset($response['ShipmentResponse']['DispatchConfirmationNumber']) ) {
+                $this->DispatchConfirmationNumber = $response['ShipmentResponse']['DispatchConfirmationNumber'];
+            }
 
             $this->statusCodes[0] = $response['ShipmentResponse']['Notification'][0]['@code'];
 

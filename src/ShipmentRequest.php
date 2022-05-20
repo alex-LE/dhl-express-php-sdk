@@ -60,6 +60,7 @@ class ShipmentRequest {
         $client = new Client();
 
         $data = $this->buildData();
+
         $options = [
             'json' => $data,
             'auth' => [
